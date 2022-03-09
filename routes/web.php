@@ -17,6 +17,7 @@ use App\Http\Controllers\adminController;
 |
 */  
 
+//Routes for unsigned in users 
 Route::get('/home', [redirectController::class,'index']);
 Route::get('/about', [maincontroller::class,'about']);
 Route::get('/contact', [maincontroller::class,'contact']);
@@ -26,7 +27,8 @@ Route::get('/booking/{name}', [maincontroller::class,'categoryBooking']);
 Route::get('/gallery', [maincontroller::class,'gallery']);
 
 Route::get('/', [redirectController::class,'index']);
- 
+
+//Middleware and route for agents controlled area 
 Route::group(['middleware' => ['auth','role:agent'] ], function () {
     Route::get('/addHome', [maincontroller::class,'addHome']);
     Route::post('/addApartment', [maincontroller::class,'addApartment']);
@@ -35,6 +37,7 @@ Route::group(['middleware' => ['auth','role:agent'] ], function () {
     Route::get('/shortlist', [maincontroller::class,'allShortlist']);
 });
 
+// routes and middleware for signed in user area
 Route::group(['middleware' => ['auth' ] ], function () { 
     Route::get('/apartment-details/{id}', [maincontroller::class,'Details']);
     Route::post('/saveBooking', [maincontroller::class,'SaveBook']); 
@@ -44,6 +47,7 @@ Route::group(['middleware' => ['auth' ] ], function () {
     Route::get('/removeFavourite/{id}', [maincontroller::class,'removeFavourite']); 
 });
 
+// routes for admin user controlled area
 Route::group(['middleware' => ['auth','role:admin'] ], function () {
     Route::get('/admin/dashboard', [adminController::class,'index']);
     Route::get('/admin/gallery', [adminController::class,'gall']);
