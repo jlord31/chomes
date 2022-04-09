@@ -17,7 +17,7 @@ use App\Http\Controllers\adminController;
 |
 */  
 
-//Routes for unsigned in users 
+//Routes for users not logged on
 Route::get('/home', [redirectController::class,'index']);
 Route::get('/about', [maincontroller::class,'about']);
 Route::get('/contact', [maincontroller::class,'contact']);
