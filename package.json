@@ -1,3 +1,4 @@
+/* Contains dependencies list and versioning */
 {
     "private": true,
     "scripts": {
